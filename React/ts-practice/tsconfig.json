@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "commonjs",
+    "strict": true, // Check every object's type
+    "esModuleInterop": true,
+    "outDir": "./dist"
+  }
+}

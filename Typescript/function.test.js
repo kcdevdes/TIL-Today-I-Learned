@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var function_1 = require("./function");
+console.log((0, function_1.default)(100, 1));
+console.log((0, function_1.addStrings)("hello", "world"));
+console.log((0, function_1.showParams)(10, "hello"));
+console.log((0, function_1.showParams)(10, 30));
+console.log((0, function_1.getName)({ first: "Kevin", last: "Choi" }));
+console.log((0, function_1.arrayMutate)([1, 2, 3], function (v) { return v * 10; }));
+var func1 = (0, function_1.createAdder)(10);
+var func2 = func1(20);
+console.log(func2);
