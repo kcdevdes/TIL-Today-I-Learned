@@ -1,0 +1,8 @@
+## Basics
+# File Systems
+.DS_Store
+
+# Logs
+.vscode/
+.idea/
+*.swp
