@@ -1,0 +1,389 @@
+/* Container Styles */
+.App {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  min-height: 100vh;
+  background: radial-gradient(
+    circle at 30% 20%,
+    #4f46e5 0%,
+    #1e1b4b 60%,
+    #0f172a 100%
+  );
+  color: #e2e8f0;
+  padding: 40px 20px 80px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Liquid Glass Backdrop Effects */
+.liquid-glass::before,
+.liquid-glass::after {
+  content: '';
+  position: absolute;
+  width: 900px;
+  height: 900px;
+  border-radius: 50%;
+  filter: blur(140px) saturate(180%);
+  opacity: 0.35;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  animation: floatBlob 18s ease-in-out infinite;
+}
+.liquid-glass::before {
+  top: -400px;
+  left: -320px;
+  background: radial-gradient(circle at 30% 30%, #6366f1, #0ea5e9 60%, #7e22ce);
+}
+.liquid-glass::after {
+  bottom: -420px;
+  right: -300px;
+  background: radial-gradient(circle at 70% 40%, #ec4899, #f59e0b 55%, #10b981);
+  animation-delay: -9s;
+}
+@keyframes floatBlob {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(120px, 40px, 0) scale(1.07);
+  }
+  66% {
+    transform: translate3d(-80px, 60px, 0) scale(0.94);
+  }
+}
+
+/* Pointer reactive highlight */
+.liquid-glass::selection {
+  background: rgba(255, 255, 255, 0.2);
+}
+.liquid-glass {
+  --pointer-x: 50%;
+  --pointer-y: 50%;
+}
+.liquid-glass .App > section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    600px circle at var(--pointer-x) var(--pointer-y),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.04) 55%,
+    transparent 70%
+  );
+  mix-blend-mode: overlay;
+  opacity: 0.65;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+.liquid-glass .App > section:hover::before {
+  opacity: 0.85;
+}
+
+/* Frosted card improvements */
+.App > section {
+  background: linear-gradient(
+    140deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.1) 35%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18) inset,
+    0 10px 28px -6px rgba(0, 0, 0, 0.5), 0 18px 60px -30px rgba(0, 0, 0, 0.9);
+}
+
+/* Elevated subtle inner gloss */
+.App > section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.35),
+      rgba(255, 255, 255, 0) 40%
+    ),
+    radial-gradient(
+      circle at 80% 0%,
+      rgba(255, 255, 255, 0.55),
+      transparent 60%
+    ),
+    linear-gradient(140deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+  mix-blend-mode: screen;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* Glassy animated border glow */
+.App > section {
+  position: relative;
+}
+.App > section::before {
+  z-index: 1;
+}
+.App > section::after {
+  z-index: 0;
+}
+
+/* Title remains after enhancements */
+.app-title {
+  text-align: center;
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -1px;
+  background: linear-gradient(90deg, #fcd34d, #f472b6, #60a5fa, #34d399);
+  background-clip: text; /* standard */
+  -webkit-background-clip: text;
+  color: transparent;
+  margin: 0 0 10px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.35));
+}
+
+.stats-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+  font-size: 0.9rem;
+  margin: 0 auto 26px;
+  color: #cbd5e1;
+}
+.progress-track {
+  position: relative;
+  height: 8px;
+  width: 240px;
+  border-radius: 100px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.06)
+  );
+  overflow: hidden;
+}
+.progress-fill {
+  position: absolute;
+  inset: 0;
+  width: 0;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12) inset,
+    0 4px 12px -2px rgba(0, 0, 0, 0.6);
+  animation: grow 0.6s ease;
+  border-radius: inherit;
+}
+@keyframes grow {
+  from {
+    width: 0;
+  }
+}
+.progress-percent {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Form */
+.add-task-form {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.add-task-form input {
+  padding: 14px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  width: min(520px, 100%);
+  font-size: 1rem;
+  color: #f1f5f9;
+  outline: none;
+  backdrop-filter: blur(6px);
+  transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+}
+.add-task-form input:focus {
+  border-color: #818cf8;
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
+}
+.add-task-button {
+  background: linear-gradient(135deg, #10b981, #059669);
+  font-size: 1.4rem;
+  line-height: 1;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0;
+  border-radius: 18px;
+  box-shadow: 0 6px 14px -4px rgba(0, 0, 0, 0.55),
+    0 2px 0 0 rgba(255, 255, 255, 0.1) inset;
+  transition: transform 0.25s, box-shadow 0.25s, filter 0.25s;
+}
+.add-task-button:hover:not(:disabled) {
+  transform: translateY(-3px);
+}
+.add-task-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+.add-task-button:disabled {
+  opacity: 0.4;
+  filter: grayscale(0.4);
+  cursor: not-allowed;
+}
+
+/* Task list */
+.task-list-wrapper {
+  text-align: left;
+  width: 100%;
+  margin: 0 auto;
+}
+.task-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.task-items li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.02)
+  );
+  padding: 14px 18px 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(6px);
+  animation: popIn 0.45s ease;
+  box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+}
+@keyframes popIn {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+}
+.task-items li.completed {
+  opacity: 0.6;
+}
+.task-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  flex: 1;
+}
+.status-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #64748b;
+  display: inline-block;
+  position: relative;
+  transition: 0.35s;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.6) inset;
+}
+.status-circle.on {
+  background: radial-gradient(circle at 35% 30%, #34d399 0%, #059669 80%);
+  border-color: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25),
+    0 2px 6px -2px rgba(0, 0, 0, 0.7);
+}
+.task-content {
+  margin: 0;
+  color: #e2e8f0;
+  line-height: 1.3;
+  font-size: 1rem;
+}
+.task-items li.completed .task-content {
+  text-decoration: line-through;
+  color: #94a3b8;
+}
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.delete-task-button {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.6);
+  transition: 0.25s;
+}
+.delete-task-button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+.delete-task-button:active {
+  transform: translateY(0);
+}
+
+.empty-state {
+  margin: 0;
+  text-align: center;
+  padding: 32px 8px;
+  font-size: 0.95rem;
+  color: #94a3b8;
+}
+
+/* Scrollbars (webkit) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.06);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#6366f1, #8b5cf6);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(#4f46e5, #7c3aed);
+}
+
+/* Utility */
+button {
+  border: none;
+  cursor: pointer;
+  color: #fff;
+}
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .stats-bar {
+    flex-wrap: wrap;
+  }
+  .progress-track {
+    width: 180px;
+  }
+  .add-task-button {
+    width: 52px;
+    height: 52px;
+  }
+  .task-items li {
+    padding: 12px 14px;
+  }
+}

@@ -1,0 +1,30 @@
+services:
+  spring-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000" # App port
+    volumes:
+      - ./src:/app/src # Bind source directory
+      - ./build.gradle:/app/build.gradle
+      - ./settings.gradle:/app/settings.gradle
+      - ./gradle:/app/gradle # Optional: Gradle cache
+    restart: unless-stopped
+    environment:
+      SPRING_PROFILES_ACTIVE: "dev"
+    command: ./gradlew bootRun --no-daemon # Run in development mode
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: springuser
+      POSTGRES_PASSWORD: springpass
+      POSTGRES_DB: springdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

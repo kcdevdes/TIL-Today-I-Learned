@@ -1,0 +1,1 @@
+// Placeholder: timerReducer - no implementation.

@@ -1,0 +1,82 @@
+.diary-item {
+  display: flex;
+  gap: 15px;
+  justify-content: space-between;
+  padding: 15px 0px;
+  border-bottom: 1px solid rgb(236, 236, 236);
+}
+
+.diary-item .img-section {
+  min-width: 120px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.diary-item .img-section > img {
+  width: 50%;
+}
+
+.diary-item .img-section-1 {
+  background-color: rgb(100, 201, 100);
+}
+
+.diary-item .img-section-2 {
+  background-color: rgb(157, 215, 114);
+}
+
+.diary-item .img-section-3 {
+  background-color: rgb(253, 206, 23);
+}
+
+.diary-item .img-section-4 {
+  background-color: rgb(253, 132, 70);
+}
+
+.diary-item .img-section-5 {
+  background-color: rgb(253, 86, 95);
+}
+
+.diary-item .info-section {
+  flex: 1;
+  cursor: pointer;
+}
+
+.diary-item .info-section .created-date {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.diary-item .info-section .content {
+  font-size: 18px;
+}
+
+.diary-item .button-section {
+  min-width: 70px;
+}
+
+/* .liquid-glass – a reusable, Apple‑style translucent backdrop */
+.liquid-glass {
+  /* Positioning/shape */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  padding: 12px 20px;
+
+  /* Core “glass” look */
+  background: rgba(255, 255, 255, 0.18); /* light‑mode tint */
+  backdrop-filter: saturate(180%) blur(20px); /* dynamic blur + saturation */
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+
+  /* Light & dark adaptation */
+  @media (prefers-color-scheme: dark) {
+    background: rgba(0, 0, 0, 0.33); /* darker tint in dark mode */
+  }
+
+  /* Subtle shading that emulates depth */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.12),
+    /* light shadow */ inset 0 1px 0 rgba(255, 255, 255, 0.1); /* top light highlight */
+}

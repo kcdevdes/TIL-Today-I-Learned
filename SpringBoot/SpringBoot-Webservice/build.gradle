@@ -1,0 +1,42 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.7.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.kcdevdes.webservice'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.projectlombok:lombok')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa') // Spring Data Jpa 추상화 라이브러리 (버전에 맞추어 자동관리)
+    compile('com.h2database:h2') // 인메모리 관계형 데이터베이스 (별도 설치 X)
+    compile('org.springframework.boot:spring-boot-starter-mustache') // Mustache 템플릿 엔진
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client') // OAuth2 의존성
+    compile('org.springframework.session:spring-session-jdbc') // session 저장소 jdbc 의존성
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.security:spring-security-test')
+}
+
+test {
+    useJUnitPlatform()
+}
