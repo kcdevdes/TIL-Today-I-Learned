@@ -1,29 +1,31 @@
-import sys
-sys.setrecursionlimit(2000)
+def solve(perm):
+  answer = 0
+  visited = [False] * len(perm)
+
+  for i in range(1, len(perm)):
+    jmp = i - 1
+
+    # 과거 순환으로 이미 넘어간 상태일 시
+    if visited[jmp]:
+      continue
+
+    while True:
+      # 이미 방문한 적 있을 때 == 순열의 끝
+      if visited[jmp]:
+        answer += 1
+        break
+
+      # 아닐 시, 방문 표기, 다음 jmp로 넘김
+      visited[jmp] = True
+      jmp = perm[jmp] - 1
+  
+  return answer
+  
 
 t = int(input())
 
-def dfs(x, perm, visited):
-  visited[x] = True
-  next = perm[x]
-  if not visited[next]:
-    dfs(next, perm, visited)
-
-
-def solve(perm, n):
-  visited = [True] + [False] * n
-  answer = 0
-
-  for i in range(1, n + 1):
-    if not visited[i]:
-      dfs(i, perm, visited)
-      answer += 1
-  
-  print(answer)
-
-
 for _ in range(t):
-  n = int(input()) # 순열의 크기
-  perm = list(map(int, input().split())) # 순열
-  solve(perm, n)
+  n = int(input())
+  perm = list(map(int, input().split()))
+  print(solve(perm))
 
