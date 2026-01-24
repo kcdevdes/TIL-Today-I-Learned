@@ -19,9 +19,9 @@ Python 3.12을 사용해 『이것이 취업을 위한 코딩 테스트다』와
 - [X] Greedy Algorithm  
   - [X] Chapter 03 Completed (Oct 23, 2024)  
   - [X] BOJ Basic Greedy Problem Set Completed (Oct 22, 2024)
-- [ ] Implementation  
-  - [ ] Chapter 04 Completed  
-  - [ ] BOJ Basic Implementation Problem Set Completed
-- [ ] DFS
-- [ ] BFS
+- [X] Implementation  
+  - [X] Chapter 04 Completed  
+  - [X] BOJ Basic Implementation Problem Set Completed
+- [X] DFS
+- [X] BFS
 - [ ] Sort
