@@ -1,15 +1,15 @@
 from collections import deque
 
-graph = [(['O'] * 6) for _ in range(12)]
+graph = [(['.'] * 6) for _ in range(12)]
 moves = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 
-def debug_print():
-  for i in range(12):
-    print(graph[i])
+H = 12
+W = 6
 
 def bfs(i, j, char, visited):
   visited[i][j] = True
   queue = deque([(i, j)])
+  popped = [(i, j)]
   count = 1
 
   while queue:
@@ -18,44 +18,66 @@ def bfs(i, j, char, visited):
       dx = x + move[0]
       dy = y + move[1]
 
-      if 0 <= dx < 12 and 0 <= dy < 6:
-        if not visited[dx][dy] and graph[dx][dy] is char:
-          count +=1
+      if 0 <= dx < H and 0 <= dy < W:
+        if not visited[dx][dy] and graph[dx][dy] == char:
           visited[dx][dy] = True
           queue.append((dx, dy))
+          popped.append((dx, dy))
 
-  return count
+  if len(popped) >= 4:
+    return popped
+  else:
+    return []
 
-def refresh(visited):
-  for i in range(12):
-    for j in range(6):
+def replaceChars(visited):
+  for i in range(H):
+    for j in range(W):
       if visited[i][j]:
-        temp = i
-        while temp - 1 >= 0:
-          graph[temp][j] = graph[temp - 1][j] # 한줄 아래로 당기기
-          temp -= 1
-        graph[0][j] = '.' # 첫 줄은 공란으로 채우기
+        graph[i][j] = '.'
 
-for i in range(12):
+def apply_gravity(graph):
+  for j in range(W):
+    stack = []
+    for i in range(H - 1, -1, -1):
+      if graph[i][j] != '.':
+        stack.append(graph[i][j])
+      
+    for i in range(H - 1, -1, -1):
+      if stack:
+        graph[i][j] = stack.pop(0)
+      else:
+        graph[i][j] = "."
+
+### MAIN ###
+
+for i in range(H):
   line_chars = input()
   for j in range(len(line_chars)):
     graph[i][j] = line_chars[j]
 
-i = 0
-j = 0
 answer = 0
-while i < 12 and j < 6:
-  if graph[i][j] == '.':
-    i += 1
-    j += 1
-    continue
+
+while True:
+  splashed = False
+  visited = [[False] * W for _ in range(H)]
+  to_pop = []
+
+  for i in range(H):
+    for j in range(W):
+      if graph[i][j] != '.' and not visited[i][j]:
+        group = bfs(i, j , graph[i][j], visited)
+        if group:
+          to_pop.extend(group)
+  
+  if to_pop:
+    splashed = True
+    for i, j, in to_pop:
+      graph[i][j] = "."
+    
+    apply_gravity(graph)
+    answer += 1
   else:
-    visited = [([False] * 6) for _ in range(12)]
-    if bfs(i, j , graph[i][j], visited) >= 4:
-      refresh(visited)
-      i = 0
-      j = 0
-      answer += 1
+    break
 
 print(answer)
 
