@@ -10,7 +10,6 @@ def bfs(i, j, char, visited):
   visited[i][j] = True
   queue = deque([(i, j)])
   popped = [(i, j)]
-  count = 1
 
   while queue:
     x, y = queue.popleft()
